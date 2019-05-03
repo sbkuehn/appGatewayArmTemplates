@@ -36,6 +36,13 @@
     "appGtwyName": {
       "type": "string"
     }
+    "location": {
+      "type": "string",
+      "defaultValue": "[resourceGroup().location]",
+      "metadata": {
+        "description": "Location for all resources."
+      }
+    }
   },
   "variables": {
     "appGtwyPrefix": "172.19.0.0/16",
