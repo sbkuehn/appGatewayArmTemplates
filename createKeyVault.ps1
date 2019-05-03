@@ -1,8 +1,8 @@
 # The name of the Azure subscription to install the Key Vault into
-$subscriptionName = 'Shannon Microsoft Azure Internal Consumption'
+$subscriptionName = '{nameOfSubscription}'
 
 # The resource group that will contain the Key Vault to create to contain the Key Vault
-$resourceGroupName = 'appGateway1'
+$resourceGroupName = '{nameOfResourceGroup}'
 
 # The name of the Key Vault to install
 $keyVaultName = '{nameOfKeyVault}'
@@ -11,7 +11,7 @@ $keyVaultName = '{nameOfKeyVault}'
 $location = 'eastus'
 
 # These are the Azure AD users that will have admin permissions to the Key Vault
-$keyVaultAdminUser = {placeUpnHere}
+$keyVaultAdminUser = {placeUPNHere}
 
 # Login to Azure
 Login-AzAccount
