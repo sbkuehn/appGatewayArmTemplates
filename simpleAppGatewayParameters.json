@@ -1,0 +1,32 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vm1Name": {
+      "value": "sbkvm1"
+    },
+    "adminUserName": {
+      "value": "sbkadmin"
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.KeyVault/vaults/appGatewayKv"
+        },
+        "secretName": "AdminPassword"
+      }
+    },
+    "windowsOsVersion": {
+      "value": "2016-Datacenter"
+    },
+    "vm2Name": {
+      "value": "sbkvm2"
+    },
+    "vnetName": {
+      "value": "appGateway"
+    },
+    "appGtwyName": {
+      "value": "sbkappgtwy"
+    }
+  }
+}
