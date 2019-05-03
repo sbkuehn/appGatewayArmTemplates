@@ -68,7 +68,7 @@
     {
       "name": "[parameters('vnetName')]",
       "type": "Microsoft.Network/virtualNetworks",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "apiVersion": "2016-03-30",
       "dependsOn": [],
       "tags": {
@@ -100,7 +100,7 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "apiVersion": "2018-12-01",
       "name": "[parameters('appGtwyPipDomainName')]",
-      "location": "East US",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "Basic",
         "tier": "Regional"
@@ -119,7 +119,7 @@
       "type": "Microsoft.Network/applicationGateways",
       "apiVersion": "2018-12-01",
       "name": "[parameters('appGtwyName')]",
-      "location": "East US",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', parameters('appGtwyPipDomainName'))]",
         "[resourceId('Microsoft.Network/networkInterfaces', variables('vm1NicName'))]",
@@ -261,7 +261,7 @@
       "type": "Microsoft.Storage/storageAccounts",
       "apiVersion": "2018-07-01",
       "name": "[variables('diagStorAcctName')]",
-      "location": "eastus",
+      "location": "[parameters('location')]",
       "sku": {
         "name": "Standard_LRS",
         "tier": "Standard"
@@ -291,7 +291,7 @@
     {
       "name": "[variables('vm1NicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "apiVersion": "2016-03-30",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', 'appGateway')]"
@@ -314,7 +314,7 @@
     {
       "name": "[parameters('vm1Name')]",
       "type": "Microsoft.Compute/virtualMachines",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "apiVersion": "2018-10-01",
       "dependsOn": [
         "[resourceId('Microsoft.Storage/storageAccounts', variables('diagStorAcctName'))]",
@@ -360,7 +360,7 @@
     {
       "name": "[variables('vm2NicName')]",
       "type": "Microsoft.Network/networkInterfaces",
-      "location": "[resourceGroup().location]",
+      "location": "[parameters('location')]",
       "apiVersion": "2016-03-30",
       "dependsOn": [
         "[resourceId('Microsoft.Network/virtualNetworks', parameters('vnetName'))]"
@@ -384,7 +384,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "apiVersion": "2018-10-01",
       "name": "[concat(parameters('vm1Name'), '/IIS')]",
-      "location": "eastus",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm1Name'))]"
       ],
@@ -449,7 +449,7 @@
       "type": "Microsoft.Compute/virtualMachines/extensions",
       "apiVersion": "2018-10-01",
       "name": "[concat(parameters('vm2Name'), '/IIS')]",
-      "location": "eastus",
+      "location": "[parameters('location')]",
       "dependsOn": [
         "[resourceId('Microsoft.Compute/virtualMachines', parameters('vm2Name'))]"
       ],
