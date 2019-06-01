@@ -4,6 +4,7 @@
 # $keyVaultName is the name of the Key Vault you are deploying
 # $location is the region your Key Vault is deploying to
 # $keyVaultAdminUser - Azure AD users or groups that have access to Key Vault
+
 param(
         [Parameter(Mandatory=$true)]
         [string] $subscriptionName,
