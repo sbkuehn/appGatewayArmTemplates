@@ -1,17 +1,22 @@
-# The name of the Azure subscription to install the Key Vault into
-$subscriptionName = '{nameOfSubscription}'
+# Script Notes
+# $subscriptionName is the name of the Azure subscription to install the Key Vault into
+# $resourceGroupName is the resource group that will contain the Key Vault to create to contain Key Vault secrets, passwords, and certificates
+# $keyVaultName is the name of the Key Vault you are deploying
+# $location is the region your Key Vault is deploying to
+# $keyVaultAdminUser - Azure AD users or groups that have access to Key Vault
 
-# The resource group that will contain the Key Vault to create to contain the Key Vault
-$resourceGroupName = '{nameOfResourceGroup}'
-
-# The name of the Key Vault to install
-$keyVaultName = '{nameOfKeyVault}'
-
-# The Azure data center to install the Key Vault to
-$location = 'eastus'
-
-# These are the Azure AD users that will have admin permissions to the Key Vault
-$keyVaultAdminUser = {placeUPNHere}
+param(
+        [Parameter(Mandatory=$true)]
+        [string] $subscriptionName,
+        [Parameter(Mandatory=$true)]
+        [string] $resourceGroupName,
+        [Parameter(Mandatory=$true)]
+        [string] $keyVaultName,
+        [Parameter(Mandatory=$true)]
+        [string] $location,
+        [Parameter(Mandatory=$true)]
+        [string] $keyVaultAdminUser
+)
 
 # Login to Azure
 Login-AzAccount
@@ -19,7 +24,7 @@ Login-AzAccount
 # Select the appropriate subscription
 Select-AzSubscription -SubscriptionName $subscriptionName
 
-# Make the Key Vault provider is available (commented out - if not registered, uncomment the line below):
+# Make the Key Vault provider is available (commented out - if not registered, uncomment the line below and run in PowerShell):
 # Register-AzureRmResourceProvider -ProviderNamespace Microsoft.KeyVault
 
 # Create the Resource Group
@@ -32,6 +37,7 @@ New-AzKeyVault -VaultName $keyVaultName -ResourceGroupName $resourceGroupName -L
 # Add the Administrator policies to the Key Vault
 $ObjectId = (Get-AzADUser -UserPrincipalName $keyVaultAdminUser).Id
 
+# Set access policy for Key Vault
 Set-AzKeyVaultAccessPolicy -VaultName $keyVaultName -ResourceGroupName $resourceGroupName -ObjectId $ObjectId `
 -PermissionsToKeys decrypt,encrypt,unwrapKey,wrapKey,verify,sign,get,list,update,create,import,delete,backup,restore,recover,purge `
 –PermissionsToSecrets get,list,set,delete,backup,restore,recover,purge `
