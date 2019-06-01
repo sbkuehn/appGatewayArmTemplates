@@ -2,14 +2,17 @@
   "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
-    "keyVaultName": {
-      "value": "[uniqueString(resourceGroup().id, deployment().name)]"
-    },
     "keyVaultSku": {
       "value": "Standard"
     },
-    "keyVaultFamily": {
-      "value": "A"
+    "enabledForDeployment": {
+      "value": true
+    },
+    "enabledForTemplateDeployment": {
+      "value": true
+    },
+    "enabledForDiskEncryption": {
+      "value": true
     },
     "keyPermissions": {
       "value": [
@@ -55,11 +58,11 @@
         "purge"
       ]
     },
-      "tenantId": {
-        "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
-      },
-      "objectId": {
-        "value": "67a00545-bee5-4a8e-85ec-9a6595f7f0e0"
-      }
+    "tenantId": {
+      "value": "72f988bf-86f1-41af-91ab-2d7cd011db47"
+    },
+    "objectId": {
+      "value": "67a00545-bee5-4a8e-85ec-9a6595f7f0e0"
     }
+  }
 }
