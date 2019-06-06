@@ -188,7 +188,14 @@
                   "id": "[concat(resourceId('Microsoft.Network/networkInterfaces', variables('vm2NicName')), '/ipConfigurations/ipconfig1')]"
                 }
               ],
-              "backendAddresses": []
+              "backendAddresses": [
+                {
+                  "ipAddress": "[variables('vm1IpAddress')]"  
+                },
+                {
+                  "ipAddress": "[variables('vm2IpAddress')]"
+                }
+              ]
             },
             "type": "Microsoft.Network/applicationGateways/backendAddressPools"
           }
